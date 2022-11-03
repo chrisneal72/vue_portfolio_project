@@ -1,0 +1,109 @@
+[{
+  "_id" : "5f25b0b30411c289940ae12b",
+  "title" : "Data 1",
+  "bodyCopy" : "<b>This is infomation about Data 1<br /><br /><b>Employment</b><br /><b>It is styled using HTML tags in the data</b> · If this had been real data, it would have important facts about the data point you are reading about.<br /><b>I even styled different lines in different ways.</b> · We have several Certified Professional Resume Writers on staff who are available to review your data on a walk-in basis.<br /><br /><b>Yet another line.</b><br /><b>And even more!</b> ·The data a few lines ago I only slightly modified from the data I took from a previous project I did.<br><b>EI will try to come up with more silly information</b> I will only come up with more silly data description if you promise to keep reading.<br /><b>You are still reading!?</b> · This means I have to keep coming up with something to write! Well you are in luck, I'm not a data entry machine, but I sure can just babble some words!<br /><b>Keep going you say!?</b> · Well, okay, lets see what I have left in the tank! How abouut a little limerick my grandmother sang to me when I was in eighth grade!?<br /><b>The limerick</b> · I knew a girl from Hanna City.... On second thought, lets not....<br /><br /><b>I'm still working on some more lines</b><br /><b>I'm trying, I'm trying</b> · Did I ever tell you about the time I went freediving and the bottom was 200 ft down and we were right over a drop off that went to 1000 feet!?<br /><br /><b>I should tell you that story about diving sometime</b><br /><b>It was cool!</b> · Oh, wow you are still reading. Wll, maybe I should sing a song. Or read a poem. Wait, if I read it, you won't hear it because you are not here while I read, it you are there in the future after I read it and write these words.<br /><b> beware of typo's</b> · I know there may be typo's in this data, but it happens when I am rambling.<br /><b>Hey I just remembered</b> · I didn't finish the diving story. Since you are still reading I guess I will tell it.<br /><br /><b>By the way, I should mention</b><br /><b>I do know</b> · There is a way in VS Code to do Lorem Ipsum text, but this is more fun.<br /><b>Back to the story</b> · So, there I was, looking down into the abyss, it was not that abyss, but when you can not see the bottom... We were out spearfishing looking for big pelagic species of fish, like tuna and ono (wahoo). We shot a few fish, we dropped a lot of bait. Eventually we had some ono come in, but we did not manage to land a shot. Every so often a few sharks would come around. None of the sharks were big, only six to eight feet long. Then, out of the corner of my eye I saw movement. A white patch. Is that a dolphin out here!? NOPE! that was just the white around the eye! A Humpback whale came gliding along and turned on its side to get a look at us. He stayed about 30 feet away from us and just checked us out. After it passed, it surfaced, grabbed a breath and kept on keeping on.  That was my story! Thanks for sticking around.<br />",
+  "addInfo" : [ 
+      {
+          "title" : "This is an array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6555"
+              }
+          ]
+      }, 
+      {
+          "title" : "This is a second array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6556"
+              }, 
+              {
+                  "line" : "623-850-6557"
+              }
+          ]
+      }
+  ]
+},
+{
+  "_id" : "5f25b0b30411c289940ae12c",
+  "title" : "Data 2",
+  "bodyCopy" : "<b>This is infomation about Data 2<br /><br /><b>Employment</b><br /><b>It is styled using HTML tags in the data</b> · If this had been real data, it would have important facts about the data point you are reading about.<br /><b>I even styled different lines in different ways.</b> · We have several Certified Professional Resume Writers on staff who are available to review your data on a walk-in basis.<br /><br /><b>Yet another line.</b><br /><b>And even more!</b> ·The data a few lines ago I only slightly modified from the data I took from a previous project I did.<br><b>EI will try to come up with more silly information</b> I will only come up with more silly data description if you promise to keep reading.<br /><b>You are still reading!?</b> · This means I have to keep coming up with something to write! Well you are in luck, I'm not a data entry machine, but I sure can just babble some words!<br /><b>Keep going you say!?</b> · Well, okay, lets see what I have left in the tank! How abouut a little limerick my grandmother sang to me when I was in eighth grade!?<br /><b>The limerick</b> · I knew a girl from Hanna City.... On second thought, lets not....<br /><br /><b>I'm still working on some more lines</b><br /><b>I'm trying, I'm trying</b> · Did I ever tell you about the time I went freediving and the bottom was 200 ft down and we were right over a drop off that went to 1000 feet!?<br /><br /><b>I should tell you that story about diving sometime</b><br /><b>It was cool!</b> · Oh, wow you are still reading. Wll, maybe I should sing a song. Or read a poem. Wait, if I read it, you won't hear it because you are not here while I read, it you are there in the future after I read it and write these words.<br /><b> beware of typo's</b> · I know there may be typo's in this data, but it happens when I am rambling.<br /><b>Hey I just remembered</b> · I didn't finish the diving story. Since you are still reading I guess I will tell it.<br /><br /><b>By the way, I should mention</b><br /><b>I do know</b> · There is a way in VS Code to do Lorem Ipsum text, but this is more fun.<br /><b>Back to the story</b> · I'm not repeating it! Go to the first data if you want the story!.<br />",
+  "addInfo" : [ 
+      {
+          "title" : "This is an array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6558"
+              }
+          ]
+      }, 
+      {
+          "title" : "This is a second array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6559"
+              }, 
+              {
+                  "line" : "623-850-6560"
+              }
+          ]
+      }
+  ]
+},
+{
+  "_id" : "5f25b0b30411c289940ae12d",
+  "title" : "Data 3",
+  "bodyCopy" : "<b>This is infomation about Data 3<br /><br /><b>Employment</b><br /><b>It is styled using HTML tags in the data</b> · If this had been real data, it would have important facts about the data point you are reading about.<br /><b>I even styled different lines in different ways.</b> · We have several Certified Professional Resume Writers on staff who are available to review your data on a walk-in basis.<br /><br /><b>Yet another line.</b><br /><b>And even more!</b> ·The data a few lines ago I only slightly modified from the data I took from a previous project I did.<br><b>EI will try to come up with more silly information</b> I will only come up with more silly data description if you promise to keep reading.<br /><b>You are still reading!?</b> · This means I have to keep coming up with something to write! Well you are in luck, I'm not a data entry machine, but I sure can just babble some words!<br /><b>Keep going you say!?</b> · Well, okay, lets see what I have left in the tank! How abouut a little limerick my grandmother sang to me when I was in eighth grade!?<br /><b>The limerick</b> · I knew a girl from Hanna City.... On second thought, lets not....<br /><br /><b>I'm still working on some more lines</b><br /><b>I'm trying, I'm trying</b> · Did I ever tell you about the time I went freediving and the bottom was 200 ft down and we were right over a drop off that went to 1000 feet!?<br /><br /><b>I should tell you that story about diving sometime</b><br /><b>It was cool!</b> · Oh, wow you are still reading. Wll, maybe I should sing a song. Or read a poem. Wait, if I read it, you won't hear it because you are not here while I read, it you are there in the future after I read it and write these words.<br /><b> beware of typo's</b> · I know there may be typo's in this data, but it happens when I am rambling.<br /><b>Hey I just remembered</b> · I didn't finish the diving story. Since you are still reading I guess I will tell it.<br /><br /><b>By the way, I should mention</b><br /><b>I do know</b> · There is a way in VS Code to do Lorem Ipsum text, but this is more fun.<br /><b>Back to the story</b> · I'm not repeating it! Go to the first data if you want the story!.<br />",
+  "addInfo" : [ 
+      {
+          "title" : "This is an array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6561"
+              }
+          ]
+      }, 
+      {
+          "title" : "This is a second array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6562"
+              }, 
+              {
+                  "line" : "623-850-6563"
+              }
+          ]
+      }
+  ]
+},
+{
+  "_id" : "5f25b0b30411c289940ae12e",
+  "title" : "Data 4",
+  "bodyCopy" : "<b>This is infomation about Data 4<br /><br /><b>It does not have additional Info like the others.</b><br /><b>It is styled using HTML tags in the data</b> · If this had been real data, it would have important facts about the data point you are reading about.<br /><b>I even styled different lines in different ways.</b> · We have several Certified Professional Resume Writers on staff who are available to review your data on a walk-in basis.<br /><br /><b>Yet another line.</b><br /><b>And even more!</b> ·The data a few lines ago I only slightly modified from the data I took from a previous project I did.<br><b>EI will try to come up with more silly information</b> I will only come up with more silly data description if you promise to keep reading.<br /><b>You are still reading!?</b> · This means I have to keep coming up with something to write! Well you are in luck, I'm not a data entry machine, but I sure can just babble some words!<br /><b>Keep going you say!?</b> · Well, okay, lets see what I have left in the tank! How abouut a little limerick my grandmother sang to me when I was in eighth grade!?<br /><b>The limerick</b> · I knew a girl from Hanna City.... On second thought, lets not....<br /><br /><b>I'm still working on some more lines</b><br /><b>I'm trying, I'm trying</b> · Did I ever tell you about the time I went freediving and the bottom was 200 ft down and we were right over a drop off that went to 1000 feet!?<br /><br /><b>I should tell you that story about diving sometime</b><br /><b>It was cool!</b> · Oh, wow you are still reading. Wll, maybe I should sing a song. Or read a poem. Wait, if I read it, you won't hear it because you are not here while I read, it you are there in the future after I read it and write these words.<br /><b> beware of typo's</b> · I know there may be typo's in this data, but it happens when I am rambling.<br /><b>Hey I just remembered</b> · I didn't finish the diving story. Since you are still reading I guess I will tell it.<br /><br /><b>By the way, I should mention</b><br /><b>I do know</b> · There is a way in VS Code to do Lorem Ipsum text, but this is more fun.<br /><b>Back to the story</b> · I'm not repeating it! Go to the first data if you want the story!.<br />",
+},
+{
+  "_id" : "5f25b0b30411c289940ae12f",
+  "title" : "Data 5",
+  "bodyCopy" : "<b>This is infomation about Data 5<br /><br /><b>I think 5 is enough</b><br /><b>It is styled using HTML tags in the data</b> · If this had been real data, it would have important facts about the data point you are reading about.<br /><b>I even styled different lines in different ways.</b> · We have several Certified Professional Resume Writers on staff who are available to review your data on a walk-in basis.<br /><br /><b>Yet another line.</b><br /><b>And even more!</b> ·The data a few lines ago I only slightly modified from the data I took from a previous project I did.<br><b>EI will try to come up with more silly information</b> I will only come up with more silly data description if you promise to keep reading.<br /><b>You are still reading!?</b> · This means I have to keep coming up with something to write! Well you are in luck, I'm not a data entry machine, but I sure can just babble some words!<br /><b>Keep going you say!?</b> · Well, okay, lets see what I have left in the tank! How abouut a little limerick my grandmother sang to me when I was in eighth grade!?<br /><b>The limerick</b> · I knew a girl from Hanna City.... On second thought, lets not....<br /><br /><b>I'm still working on some more lines</b><br /><b>I'm trying, I'm trying</b> · Did I ever tell you about the time I went freediving and the bottom was 200 ft down and we were right over a drop off that went to 1000 feet!?<br /><br /><b>I should tell you that story about diving sometime</b><br /><b>It was cool!</b> · Oh, wow you are still reading. Wll, maybe I should sing a song. Or read a poem. Wait, if I read it, you won't hear it because you are not here while I read, it you are there in the future after I read it and write these words.<br /><b> beware of typo's</b> · I know there may be typo's in this data, but it happens when I am rambling.<br /><b>Hey I just remembered</b> · I didn't finish the diving story. Since you are still reading I guess I will tell it.<br /><br /><b>By the way, I should mention</b><br /><b>I do know</b> · There is a way in VS Code to do Lorem Ipsum text, but this is more fun.<br /><b>Back to the story</b> · I'm not repeating it! Go to the first data if you want the story!.<br />",
+  "addInfo" : [ 
+      {
+          "title" : "This is an array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6564"
+              }
+          ]
+      }, 
+      {
+          "title" : "This is a second array",
+          "lines" : [ 
+              {
+                  "line" : "623-850-6565"
+              }, 
+              {
+                  "line" : "623-850-6566"
+              }
+          ]
+      }
+  ]
+}]
