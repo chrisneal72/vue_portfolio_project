@@ -2,11 +2,17 @@
   <v-container class="map-view">
     <v-row class="text-center">
       <v-col
-        class="col-sm-12 col-md-9 mb-4 ml-auto mr-auto"
+        class="col-sm-12 col-md-9 mb-4 ml-auto mr-auto text-center"
         justify="center"
         no-gutters
       >
         <h1>A fun Progress Map</h1>
+      </v-col>
+      <v-col
+        class="col-sm-12 col-md-9 mb-4 ml-auto mr-auto text-left"
+        justify="center"
+        no-gutters
+      >
         <p>
           I animated this map for a Culver's promotion while working at PrizeLogic. Customers were rewarded for participating over multiple days of the promotion’s life cycle. The participant could choose from 4 vehicles as their playing piece and when they would return to the promotion and redeem their code, they would move forward one day on the map.
         </p>
@@ -14,14 +20,14 @@
           The progress was controlled from a C# .Net backend that would pass the users current number of days completed to the front. The map would load with their vehicle on their previous location and then move one space forward.
         </p>
         <p>
-          This was originally built in Vanilla JavaScript. I have reworked this for Vue. There are still a few things on the todo list that I will add over time, such as: there should be a different pin for the upcoming spot, The pin on the current spot should fade in as the vehicle leaves and there will be 4 vehicles to choose from. Last, I will put the current day into a state variable so that when the page is left and you come back it will remember where you were.
+          This was originally built in Vanilla JavaScript. I have reworked this for Vue. I need to put the current day and a few other variable into a state so that when the page is left and you come back it will remember where you were.
         </p>
         <p>
           Also, on the list is to figure out how Vuetify handles class level media breakpoints. I found some information, but a quick test was not successful, so I put it aside for the moment.
         </p>
       </v-col>
       <v-col
-        class="col-sm-12 col-md-9 mb-4 ml-auto mr-auto"
+        class="col-12 col-md-9 mb-4 ml-auto mr-auto"
         justify="center"
         no-gutters
       >
@@ -65,20 +71,23 @@
           :key="pin.currentPinID"
           :id="'pin'+pin.currentPinID"
           :style="pin.pinLocation"
+          :class="{showPiece: showPin && pin.currentPinID === currentPlay - 1, hidePiece: !showPin && pin.currentPinID === currentPlay - 1}"
           class="pin"
           src="../assets/map_images/visited.png"
           height="2.1875rem"
           width="2.1875rem"
           alt="visited pin"
         />
-        <!-- <v-img
+        <v-img
+          :style="nextPinLocation"
+          :class="{showPiece: showNextPin , hidePiece: !showNextPin}"
           src="../assets/map_images/upcoming.png"
           id="upcomingPin"
           height="2.1875rem"
           width="2.1875rem"
           alt="upcoming pin"
           class="pin"
-        /> -->
+        />
         <v-img
           src="../assets/map_images/gameMap.png"
           class="map"
@@ -161,10 +170,11 @@
   .pin {
     position: absolute;
     z-index: 6;
+    transition: transform ease-in-out 1.5s;
   }
 
   .showPiece {
-    display: inline-block;
+    display: block;
   }
 
   .hidePiece {
@@ -189,64 +199,48 @@
       pinSize: 0,
       carTranslate: null,
       showVehicle: false,
+      showPin: false,
+      showNextPin: false,
+      nextPinLocation: null,
     }),
 
     methods: {
       setupMap() {
         this.showVehicle = false; // Hide Vehicle to shift it to Start Point
+        this.showNextPin = false; // Hide Nex Pin to shift it to Start Point
         //if day 1 use position [0] of array all others use the
         //position of the day before(-2 places in the array)
         this.vehicleStartCoords = this.currentPlay === 1 ? 0 : this.currentPlay - 2;
         this.startPointFixed = this.addVehicleUnits(this.path[this.vehicleStartCoords]); //Correct coords based on screen size and add units
-        this.vehicleMove(`transform: translate(${this.startPointFixed})`)
-        setTimeout(() => {this.showVehicle = true;},1500); //Vehicle is hidden when it is placed and after the first // this.myVehicle.style.transform = "translate(" + this.startPointFixed + ")"; //Vehicle initially placed on first point of the map
-        // this.myVehicle.style.display = "block"; //Vehicle is hidden when it is placed and after the first move to the start is revealed
-        // if (this.currentPlay > 2) {
-        //     for (let i = 1; i < this.currentPlay - 1; i++) {
-        //         this.constructPin(i, this.path[i - 1], "visited"); //Drop pin on visited location
-        //     }
-        // }
+        this.carTranslate = `transform: translate(${this.startPointFixed})`;
+        if(this.currentPlay === 1){
+          let units = this.addPinUnits(this.path[this.currentPlay])
+          this.nextPinLocation = `transform: translate(${units})`;
+        }else if(this.currentPlay < 28){
+          let units = this.addPinUnits(this.path[this.currentPlay - 1])
+          this.nextPinLocation = `transform: translate(${units})`;
+        }
+        setTimeout(() => {this.showVehicle = true;},1500); //Vehicle is hidden when it is placed because of the transition, we don't want it floating in from its start point, we need to let in get into place.
+        setTimeout(() => {this.showNextPin = true;},1500); //Next pin is hidden when it is placed because of the transition, we don't want it floating in from its start point, we need to let in get into place.
+
         if (this.currentPlay > 1) {
             this.animateMap();
-        } else {
-            this.constructPin(2, this.path[this.currentPlay], "upcoming"); //Call the function to create the Upcoming PIN and position it
         }
       },
+
       animateMap() {
         //I put this Timeout in as an option to have tha animation start later if they have to scroll
           let self = this;
         setTimeout(() => {
           //Move Vehicle to the next day and put pin on previous day
           let vehicleUnits = this.addVehicleUnits(self.path[self.currentPlay - 1]);
-          this.vehicleMove(`transform: translate(${vehicleUnits})`); //Move the vehicle (accounting for 0 based array)
-          // setTimeout(function () {
-          //   this.constructPin((this.currentPlay - 1), this.path[this.currentPlay - 2], "visited"); //Drop pin on previous location
-          // }, 750);
-          // if (this.currentPlay < 28) { //On the move of the Vehicle we place the Upcoming Pin Play #28 the pin is not req
-          //   setTimeout(function () { //This timer delays the Upcoming Pin
-          //     this.constructPin((this.currentPlay + 1), this.path[this.currentPlay], "upcoming"); //Call the function to create the Upcoming PIN and position it
-          //   }, 1500);
-          // }
-
+          this.carTranslate = `transform: translate(${vehicleUnits})`; //Move the vehicle (accounting for 0 based array)
+          if(this.currentPlay < 27){
+            let units = this.addPinUnits(this.path[this.currentPlay])
+            this.nextPinLocation = `transform: translate(${units})`;
+          }
+          setTimeout(() => {this.showPin = true;}, 750);
         }, 2500);
-      },
-
-      //********** CREATE AND POSITION PIN **********//
-      // constructPin(currentPinID, visitedPinCoord, pinType) {
-      constructPin() {
-        // let upcomingPinCoordsFixed = this.addPinUnits(visitedPinCoord); //Correct coords based on screen size and add units
-        // let elem = document.createElement("img"); //Create the img that will be our Visited Pin
-
-        //elm.attributes are constructing our pin image
-        // elem.setAttribute("src", "/images/map_images/" + pinType + ".png");
-        // elem.setAttribute("height", this.pinSize);
-        // elem.setAttribute("width", this.pinSize);
-        // elem.setAttribute("alt", "pin" + currentPinID);
-        // elem.setAttribute("class", "pin");
-        // elem.setAttribute("id", "pin" + currentPinID);
-        // this.mapDiv.insertBefore(elem, this.mapDiv.firstChild); //Places the pin on the map, initially before the map image inside #map-div
-
-        // document.getElementById("pin" + currentPinID).style.transform = "translate(" + upcomingPinCoordsFixed + ")"; //Places pin in proper location
       },
 
       //********** CORRECTS PIN COORDS IF REQ BASED ON SIZE AND ANDS UNITS **********//
@@ -278,10 +272,8 @@
             return '' + (vehicleCoordsArray[0] - 40) + "px, " + (vehicleCoordsArray[1] - 40) + "px";
         }
       },
-      vehicleMove(movement) {
-        this.carTranslate = movement ? movement : null;
-      },
       changeCurrentDay(){
+        this.showPin = false;
         this.currentPlay = this.selectedDay;
         this.setupMap();
         this.animateMap();
