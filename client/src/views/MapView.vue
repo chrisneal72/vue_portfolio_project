@@ -8,14 +8,16 @@
       >
         <h1>A fun Progress Map</h1>
         <p>
-          This map was developed for a promotion that rewarded people for
-          participating over multiple days of the promotions life cycle. The
-          participant could choose the vehicle they wanted and when they would
-          return to the promotion and redeem their code, they would move forward
-          one day on the map. The progress was controlled from a C# .Net backend
-          that would pass the users current number of days completed. The map
-          would load with their vehicle on their previos location and then move
-          one space forward.
+          I animated this map for a Culver's promotion while working at PrizeLogic. Customers were rewarded for participating over multiple days of the promotion’s life cycle. The participant could choose from 4 vehicles as their playing piece and when they would return to the promotion and redeem their code, they would move forward one day on the map.
+        </p>
+        <p>
+          The progress was controlled from a C# .Net backend that would pass the users current number of days completed to the front. The map would load with their vehicle on their previous location and then move one space forward.
+        </p>
+        <p>
+          This was originally built in Vanilla JavaScript. I have reworked this for Vue. There are still a few things on the todo list that I will add over time, such as: there should be a different pin for the upcoming spot, The pin on the current spot should fade in as the vehicle leaves and there will be 4 vehicles to choose from. Last, I will put the current day into a state variable so that when the page is left and you come back it will remember where you were.
+        </p>
+        <p>
+          Also, on the list is to figure out how Vuetify handles class level media breakpoints. I found some information, but a quick test was not successful, so I put it aside for the moment.
         </p>
       </v-col>
       <v-col
@@ -45,6 +47,7 @@
           src="../assets/map_images/car.png"
           id="vehicleCar"
           alt="Your Vehicle"
+          :class="{showPiece: showVehicle, hidePiece: !showVehicle}"
           :style="carTranslate"
         />
         <img
@@ -57,6 +60,25 @@
           id="vehicleTruck"
           alt="Your Vehicle"
         />
+        <v-img
+          v-for="pin in pinList"
+          :key="pin.currentPinID"
+          :id="'pin'+pin.currentPinID"
+          :style="pin.pinLocation"
+          class="pin"
+          src="../assets/map_images/visited.png"
+          height="2.1875rem"
+          width="2.1875rem"
+          alt="visited pin"
+        />
+        <!-- <v-img
+          src="../assets/map_images/upcoming.png"
+          id="upcomingPin"
+          height="2.1875rem"
+          width="2.1875rem"
+          alt="upcoming pin"
+          class="pin"
+        /> -->
         <v-img
           src="../assets/map_images/gameMap.png"
           class="map"
@@ -87,7 +109,7 @@
 
     .map {
       // max-width: 320px;
-      width: 1000px;
+      max-width: 1000px;
       z-index: 5;
       margin: auto;
 
@@ -111,7 +133,6 @@
   }
 
   #vehicleCar {
-    display: block;
     position: absolute;
     z-index: 7;
     left: 0;
@@ -141,6 +162,14 @@
     position: absolute;
     z-index: 6;
   }
+
+  .showPiece {
+    display: inline-block;
+  }
+
+  .hidePiece {
+    display: none;
+  }
 }
 </style>
 
@@ -159,36 +188,24 @@
       startPointFixed: null, //Correct coords based on screen size and add units
       pinSize: 0,
       carTranslate: null,
+      showVehicle: false,
     }),
-
-    mounted() {
-      if (window.innerWidth < 768) {
-          this.myVehicle.width = "26";
-          this.pinSize = "8.75";
-      }
-      else if (window.innerWidth < 1024) {
-          this.myVehicle.width = "60";
-          this.pinSize = "26.25";
-      } else {
-          this.pinSize = "35";
-      }
-      this.setupMap()
-    },
 
     methods: {
       setupMap() {
+        this.showVehicle = false; // Hide Vehicle to shift it to Start Point
         //if day 1 use position [0] of array all others use the
         //position of the day before(-2 places in the array)
         this.vehicleStartCoords = this.currentPlay === 1 ? 0 : this.currentPlay - 2;
         this.startPointFixed = this.addVehicleUnits(this.path[this.vehicleStartCoords]); //Correct coords based on screen size and add units
         this.vehicleMove(`transform: translate(${this.startPointFixed})`)
-        // this.myVehicle.style.transform = "translate(" + this.startPointFixed + ")"; //Vehicle initially placed on first point of the map
+        setTimeout(() => {this.showVehicle = true;},1500); //Vehicle is hidden when it is placed and after the first // this.myVehicle.style.transform = "translate(" + this.startPointFixed + ")"; //Vehicle initially placed on first point of the map
         // this.myVehicle.style.display = "block"; //Vehicle is hidden when it is placed and after the first move to the start is revealed
-        if (this.currentPlay > 2) {
-            for (let i = 1; i < this.currentPlay - 1; i++) {
-                this.constructPin(i, this.path[i - 1], "visited"); //Drop pin on visited location
-            }
-        }
+        // if (this.currentPlay > 2) {
+        //     for (let i = 1; i < this.currentPlay - 1; i++) {
+        //         this.constructPin(i, this.path[i - 1], "visited"); //Drop pin on visited location
+        //     }
+        // }
         if (this.currentPlay > 1) {
             this.animateMap();
         } else {
@@ -200,9 +217,7 @@
           let self = this;
         setTimeout(() => {
           //Move Vehicle to the next day and put pin on previous day
-          console.log(self.path[parseInt(self.currentPlay) - 1])
           let vehicleUnits = this.addVehicleUnits(self.path[self.currentPlay - 1]);
-          console.log(vehicleUnits)
           this.vehicleMove(`transform: translate(${vehicleUnits})`); //Move the vehicle (accounting for 0 based array)
           // setTimeout(function () {
           //   this.constructPin((this.currentPlay - 1), this.path[this.currentPlay - 2], "visited"); //Drop pin on previous location
@@ -213,7 +228,7 @@
           //   }, 1500);
           // }
 
-        }, 4500);
+        }, 2500);
       },
 
       //********** CREATE AND POSITION PIN **********//
@@ -251,7 +266,6 @@
 
       //********** CORRECTS VEHICLE COORDS IF REQ BASED ON SIZE AND ANDS UNITS **********//
       addVehicleUnits(passedVehicleCoords) {
-        console.log(passedVehicleCoords)
         let vehicleCoordsArray = passedVehicleCoords.split(",");
 
         //Adjust for screen size and add "px"
@@ -265,7 +279,6 @@
         }
       },
       vehicleMove(movement) {
-        console.log(movement)
         this.carTranslate = movement ? movement : null;
       },
       changeCurrentDay(){
@@ -280,8 +293,33 @@
         let itemList = [];
         for(var i = 1; i < 29; i++) { itemList[i-1] = {value: i, day: 'Day ' + i} }
         return itemList;
+      },
+      pinList(){
+        let myPinList = [];
+        for(var i = 1; i <= this.currentPlay - 1; i++) {
+          let myPinCoords = this.addPinUnits(this.path[i - 1]);
+          myPinList[i-1] = {
+            currentPinID: i,
+            pinLocation: `transform: translate(${myPinCoords})`,
+          }
+        }
+        return myPinList;
+      },
+    },
+
+    mounted() {
+      if (window.innerWidth < 768) {
+          this.myVehicle.width = "26";
+          this.pinSize = "8.75";
       }
-    }
+      else if (window.innerWidth < 1024) {
+          this.myVehicle.width = "60";
+          this.pinSize = "26.25";
+      } else {
+          this.pinSize = "35";
+      }
+      this.setupMap()
+    },
 
   }
 </script>
