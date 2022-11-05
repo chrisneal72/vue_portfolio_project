@@ -16,7 +16,9 @@
         </h1>
 
         <p class="subheading font-weight-regular">
-          This page is just beginning. I am currently in the process of gathering some of my previous work to combine and showcase here. Including work I did on https://19crimes.com/pages/rewards and https://energizergorewards.com/
+          This page is just beginning. I am currently in the process of gathering some of my previous work to combine and showcase here. Including work I did on https://19crimes.com/pages/rewards and https://energizergorewards.com/<br />
+          <br />
+          I am working on some of the mobile resizing in certain areas.
         </p>
       </v-col>
 

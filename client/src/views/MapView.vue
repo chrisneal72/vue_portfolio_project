@@ -18,6 +18,22 @@
           one space forward.
         </p>
       </v-col>
+      <v-col
+        class="col-sm-12 col-md-9 mb-4 ml-auto mr-auto"
+        justify="center"
+        no-gutters
+      >
+        <v-select
+          v-model="selectedDay"
+          :items="items"
+          item-text="day"
+          item-value="value"
+          filled
+          label="Select current Day"
+          id="daySelector"
+          @change="changeCurrentDay"
+        ></v-select>
+      </v-col>
       <v-col class="col-12 mb-4 ml-auto mr-auto">
         <div class="map-box">
         <img
@@ -72,7 +88,7 @@
     .map {
       // max-width: 320px;
       width: 1000px;
-      z-index: 50;
+      z-index: 5;
       margin: auto;
 
       /* @include breakpoint(medium) {
@@ -88,7 +104,7 @@
   #vehicleRV {
     display: none;
     position: absolute;
-    z-index: 51;
+    z-index: 7;
     left: 0;
     top: 0;
     transition: transform ease-in-out 1.5s;
@@ -97,7 +113,7 @@
   #vehicleCar {
     display: block;
     position: absolute;
-    z-index: 51;
+    z-index: 7;
     left: 0;
     top: 0;
     transition: transform ease-in-out 1.5s;
@@ -106,7 +122,7 @@
   #vehicleVan {
     display: none;
     position: absolute;
-    z-index: 51;
+    z-index: 7;
     left: 0;
     top: 0;
     transition: transform ease-in-out 1.5s;
@@ -115,7 +131,7 @@
   #vehicleTruck {
     display: none;
     position: absolute;
-    z-index: 51;
+    z-index: 7;
     left: 0;
     top: 0;
     transition: transform ease-in-out 1.5s;
@@ -123,7 +139,7 @@
 
   .pin {
     position: absolute;
-    z-index: 9;
+    z-index: 6;
   }
 }
 </style>
@@ -132,8 +148,8 @@
 // import { mapGetters, mapState } from 'vuex';
   export default {
     data: () => ({
-      currentPlay: 5,
-
+      currentPlay: 1,
+      selectedDay: 0,
       path: [
         '588,107.77', '617.64,149', '621.21,200.19', '612.28,241.43', '662.19,218.83', '692.06,164.19', '715.43,232.87', '687.85,281', '669.6,317', '773.77,317', '748.36,362.83', '707.26,378.28', '720.28,439.81', '653.13,387.21', '498.91,426', '458.83,385.17', '552.79,279.34', '567,187.55', '527.64,119.89', '438.79,67', '443,132.66', '464.57,199.17', '463.81,260.45', '360.4,252.91', '322.49,157.81', '220.62,155', '261.34,257.26', '261.34,355.81'
       ],
@@ -156,27 +172,29 @@
       } else {
           this.pinSize = "35";
       }
-
-      //if day 1 use position [0] of array all others use the
-      //position of the day before(-2 places in the array)
-      this.vehicleStartCoords = this.currentPlay === 1 ? 0 : this.currentPlay - 2;
-      this.startPointFixed = this.addVehicleUnits(this.path[this.vehicleStartCoords]); //Correct coords based on screen size and add units
-      this.vehicleMove(`transform: translate(${this.startPointFixed})`)
-      // this.myVehicle.style.transform = "translate(" + this.startPointFixed + ")"; //Vehicle initially placed on first point of the map
-      // this.myVehicle.style.display = "block"; //Vehicle is hidden when it is placed and after the first move to the start is revealed
-      if (this.currentPlay > 2) {
-          for (let i = 1; i < this.currentPlay - 1; i++) {
-              this.constructPin(i, this.path[i - 1], "visited"); //Drop pin on visited location
-          }
-      }
-      if (this.currentPlay > 1) {
-          this.animateMap();
-      } else {
-          this.constructPin(2, this.path[this.currentPlay], "upcoming"); //Call the function to create the Upcoming PIN and position it
-      }
+      this.setupMap()
     },
 
     methods: {
+      setupMap() {
+        //if day 1 use position [0] of array all others use the
+        //position of the day before(-2 places in the array)
+        this.vehicleStartCoords = this.currentPlay === 1 ? 0 : this.currentPlay - 2;
+        this.startPointFixed = this.addVehicleUnits(this.path[this.vehicleStartCoords]); //Correct coords based on screen size and add units
+        this.vehicleMove(`transform: translate(${this.startPointFixed})`)
+        // this.myVehicle.style.transform = "translate(" + this.startPointFixed + ")"; //Vehicle initially placed on first point of the map
+        // this.myVehicle.style.display = "block"; //Vehicle is hidden when it is placed and after the first move to the start is revealed
+        if (this.currentPlay > 2) {
+            for (let i = 1; i < this.currentPlay - 1; i++) {
+                this.constructPin(i, this.path[i - 1], "visited"); //Drop pin on visited location
+            }
+        }
+        if (this.currentPlay > 1) {
+            this.animateMap();
+        } else {
+            this.constructPin(2, this.path[this.currentPlay], "upcoming"); //Call the function to create the Upcoming PIN and position it
+        }
+      },
       animateMap() {
         //I put this Timeout in as an option to have tha animation start later if they have to scroll
           let self = this;
@@ -250,9 +268,19 @@
         console.log(movement)
         this.carTranslate = movement ? movement : null;
       },
+      changeCurrentDay(){
+        this.currentPlay = this.selectedDay;
+        this.setupMap();
+        this.animateMap();
+      },
     },
 
     computed: {
+      items(){
+        let itemList = [];
+        for(var i = 1; i < 29; i++) { itemList[i-1] = {value: i, day: 'Day ' + i} }
+        return itemList;
+      }
     }
 
   }

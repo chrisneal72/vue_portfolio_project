@@ -6,6 +6,10 @@ class SampleDataService {
     return http.get("api/sample");
   }
 
+  retrieveRecordCount() {
+    return http.get("api/count");
+  }
+
   get(id) {
     return http.get(`api/sample/${id}`);
   }
@@ -27,7 +31,7 @@ class SampleDataService {
   }
 
   findByTitle(title) {
-    return http.get(`api/sample?title=${title}`);
+    return http.get(`api/sample/${title}`);
   }
 }
 

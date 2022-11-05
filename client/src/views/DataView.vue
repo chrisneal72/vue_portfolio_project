@@ -1,17 +1,22 @@
 <template>
   <v-container class="data-view">
     <v-row class="text-center">
-
-      <v-col class="mb-4">
-        <h1>This page displays text pulled from MongoDB</h1>
-        <div class="pl-view-welcome grid-container">
-          <div class="grid-x grid-margin-x align-center">
-            <div v-for="(sample, i) in samples" :key="i" class="cell small-12 medium-6">
-              <h2>{{ sample.title }}</h2>
-              <p v-html="sample.bodyCopy" />
-            </div>
-          </div>
-        </div>
+      <v-col class="col-12 mb-4">
+        <h1>This page displays text pulled from&nbsp;MongoDB</h1>
+      </v-col>
+    </v-row>
+    <v-row class="text-center">
+      <v-col  v-for="(sample, i) in samples" :key="i" class="col-sm-12 col-md-6 mb-4">
+        <h2>{{ sample.title }}</h2>
+        <p v-html="sample.bodyCopy" />
+      </v-col>
+    </v-row>
+    <v-row class="text-center">
+      <v-col class="col-sm-12 col-md-4 mb-4">
+        {{ recordCount }}
+      </v-col>
+      <v-col class="col-sm-12 col-md-8 mb-4">
+        asd
       </v-col>
     </v-row>
   </v-container>
@@ -28,9 +33,22 @@ export default {
       currentSample: null,
       currentIndex: -1,
       title: "",
+      recordCount: null,
     };
   },
+
   methods: {
+    retrieveRecordCount() {
+      SampleDataService.retrieveRecordCount()
+        .then((response) => {
+          this.recordCount = response.data.data;
+          console.log(response.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
     retrieveSamples() {
       SampleDataService.getAll()
         .then((response) => {
@@ -64,10 +82,10 @@ export default {
         });
     },
 
-    searchTitle() {
-      SampleDataService.findByTitle(this.title)
+    searchTitle(x) {
+      SampleDataService.findByTitle(x)
         .then((response) => {
-          this.samples = response.data;
+          this.samples = response.data.data;
           console.log(response.data);
         })
         .catch((e) => {
@@ -75,8 +93,11 @@ export default {
         });
     },
   },
+
   mounted() {
-    this.retrieveSamples();
+    // this.retrieveSamples();
+    this.retrieveRecordCount();
+    this.searchTitle('Data 1');
   },
 };
 </script>
