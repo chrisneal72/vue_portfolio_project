@@ -20,7 +20,7 @@
           The progress was controlled from a C# .Net backend that would pass the users current number of days completed to the front. The map would load with their vehicle on their previous location and then move one space forward.
         </p>
         <p>
-          This was originally built in Vanilla JavaScript. I have reworked this for Vue. I need to put the current day and a few other variable into a state so that when the page is left and you come back it will remember where you were.
+          This was originally built in Vanilla JavaScript. I have reworked this for Vue. I still need to add another pulldown menu to change the vehicle type. I will be puttting the current day and a few other variable into a state so that when the page is left and you come back it will remember where you were.
         </p>
         <p>
           Also, on the list is to figure out how Vuetify handles class level media breakpoints. I found some information, but a quick test was not successful, so I put it aside for the moment.
